@@ -3434,6 +3434,12 @@ const Index = () => {
       {/* Auto-sliding Hero Carousel */}
       <HeroCarousel />
 
+      {/* Reference Hero Banner — premium marketplace-style hero (added on top of existing) */}
+      <RefHeroBanner />
+
+      {/* Industry Grid */}
+      <div className="max-w-7xl mx-auto"><IndustryGrid /></div>
+
       {/* Category Slider (auto-scroll) */}
       <CategorySlider />
 
@@ -3536,11 +3542,24 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Reference marketplace sections (added below product grid, keeping design intact) */}
+      <div className="max-w-7xl mx-auto">
+        <AIZone />
+        <SuccessStories />
+        <AwardsRow />
+        <LiveActivity />
+        <ValaTV />
+        <ValaAcademy />
+        <PartnerEcosystem />
+        <FaqSection />
+        <EnterpriseCTA />
+      </div>
+
       {/* Footer */}
       <footer className="bg-[#0a1628] border-t border-cyan-500/20 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">© 2024 Software Vala - The Name of Trust. All rights reserved.</p>
-          <p className="text-cyan-400 mt-2">40 Master Categories • 204 Software Solutions • 20 Live Demos Ready</p>
+          <p className="text-cyan-400 mt-2">55 Master Categories • {allDemos.length} Software Solutions • 20 Live Demos Ready</p>
         </div>
       </footer>
     </div>

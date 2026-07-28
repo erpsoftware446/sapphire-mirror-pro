@@ -3431,14 +3431,12 @@ const Index = () => {
       {/* Festive Banner */}
       <FestiveBanner />
 
-      {/* Auto-sliding Hero Carousel */}
+      {/* Auto-sliding Hero Carousel (merged: featured products + catalog/lifetime/delivery/AI slides) */}
       <HeroCarousel />
-
-      {/* Reference Hero Banner — premium marketplace-style hero (added on top of existing) */}
-      <RefHeroBanner />
 
       {/* Industry Grid */}
       <div className="max-w-7xl mx-auto"><IndustryGrid /></div>
+
 
       {/* Category Slider (auto-scroll) */}
       <CategorySlider />

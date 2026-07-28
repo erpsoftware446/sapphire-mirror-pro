@@ -22,6 +22,12 @@ import softwareValaLogo from "@/assets/software-vala-logo.jpg";
 import HeroCarousel from "@/components/marketplace/HeroCarousel";
 import FestiveBanner from "@/components/marketplace/FestiveBanner";
 import CategorySlider from "@/components/marketplace/CategorySlider";
+import RefHeroBanner from "@/components/marketplace/RefHeroBanner";
+import {
+  IndustryGrid, AIZone, SuccessStories, AwardsRow, LiveActivity,
+  ValaTV, Academy as ValaAcademy, PartnerEcosystem, FaqSection, EnterpriseCTA,
+} from "@/components/marketplace/RefSections";
+import { extraDemos, allMasterCategories55 } from "@/data/extraDemos";
 
 interface Demo {
   id: string;
@@ -3330,52 +3336,12 @@ const allDemos: Demo[] = [
     price: "\u20b969,999",
     discountPrice: "\u20b941,999"
   }
+,
+  ...extraDemos,
 ];
 
-// Master Categories for filtering (20 Categories)
-const masterCategories = [
-  "All",
-  "Education",
-  "Retail & POS",
-  "Healthcare",
-  "Logistics",
-  "Real Estate",
-  "Finance",
-  "Accounting",
-  "Sales & CRM",
-  "Marketing",
-  "HR & Payroll",
-  "ERP",
-  "Inventory",
-  "E-commerce",
-  "Hospitality",
-  "Telecom",
-  "Support",
-  "Legal",
-  "Government",
-  "Security",
-  "Cyber Security",
-  "Insurance",
-  "Telecom",
-  "Warehouse",
-  "Rental",
-  "Automobile",
-  "Religious",
-  "Public Utilities",
-  "Defense",
-  "Enterprise Admin",
-  "Veterinary",
-  "Food Manufacturing",
-  "Media & Design",
-  "Travel",
-  "Academy",
-  "Productivity",
-  "AI & Automation",
-  "Event",
-  "Construction",
-  "Agriculture",
-  "Manufacturing"
-];
+// Master Categories for filtering (55 rows — matches actual data values)
+const masterCategories = ["All", ...allMasterCategories55];
 
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -3468,6 +3434,12 @@ const Index = () => {
       {/* Auto-sliding Hero Carousel */}
       <HeroCarousel />
 
+      {/* Reference Hero Banner — premium marketplace-style hero (added on top of existing) */}
+      <RefHeroBanner />
+
+      {/* Industry Grid */}
+      <div className="max-w-7xl mx-auto"><IndustryGrid /></div>
+
       {/* Category Slider (auto-scroll) */}
       <CategorySlider />
 
@@ -3480,7 +3452,7 @@ const Index = () => {
             transition={{ duration: 0.6 }}
           >
             <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 mb-4">
-              <Star className="h-3 w-3 mr-1" /> 40 Master Categories • 204 Software Solutions • 20 Live Demos
+              <Star className="h-3 w-3 mr-1" /> 55 Master Categories • {allDemos.length} Software Solutions • 20 Live Demos
             </Badge>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <div className="flex items-center gap-2 text-emerald-400">
@@ -3570,11 +3542,24 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Reference marketplace sections (added below product grid, keeping design intact) */}
+      <div className="max-w-7xl mx-auto">
+        <AIZone />
+        <SuccessStories />
+        <AwardsRow />
+        <LiveActivity />
+        <ValaTV />
+        <ValaAcademy />
+        <PartnerEcosystem />
+        <FaqSection />
+        <EnterpriseCTA />
+      </div>
+
       {/* Footer */}
       <footer className="bg-[#0a1628] border-t border-cyan-500/20 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">© 2024 Software Vala - The Name of Trust. All rights reserved.</p>
-          <p className="text-cyan-400 mt-2">40 Master Categories • 204 Software Solutions • 20 Live Demos Ready</p>
+          <p className="text-cyan-400 mt-2">55 Master Categories • {allDemos.length} Software Solutions • 20 Live Demos Ready</p>
         </div>
       </footer>
     </div>

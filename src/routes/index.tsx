@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import HomeIndex from "@/components/HomeIndex";
 import { Toaster } from "sonner";
+import { heroPublicQuery } from "@/lib/marketplace-content/heroQueries";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "20 master categories, 147 products, 20 live demos. Lifetime access." },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(heroPublicQuery()),
   component: Index,
 });
 

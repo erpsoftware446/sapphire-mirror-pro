@@ -30,67 +30,8 @@ import {
 import { Card, EmptyHint, PageHeader, PillButton, StatCard, SubNav, SectionRow } from "../ui";
 import { TableToolbar, RowActions, BulkActionBar } from "../actions";
 
-// ---------- HERO BANNER MANAGER ----------
-export function HeroBannerSection() {
-  const [active, setActive] = useState("All Banners");
-  return (
-    <div className="px-4 py-8 md:px-8">
-      <PageHeader
-        eyebrow="Hero Banner Manager · 20 slots"
-        title="Hero Banner Manager"
-        description="Cinematic, schedulable storefront banners with country, language and device targeting."
-        actions={
-          <>
-            <PillButton variant="ghost">Reorder</PillButton>
-            <PillButton variant="primary">
-              <span className="inline-flex items-center gap-1.5"><Plus className="h-3.5 w-3.5" /> New Banner</span>
-            </PillButton>
-          </>
-        }
-      />
-      <SubNav items={["All Banners", "Scheduled", "Live", "Drafts", "Archived"]} active={active} onChange={setActive} />
+export { HeroBannerSection } from "./HeroBannerSection";
 
-      <TableToolbar title="Banners" count={20} extraActions={["publish", "feature"]} />
-      <BulkActionBar selectedCount={0} />
-
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatCard label="Total Slots" value="20" />
-        <StatCard label="Live" value="—" tone="success" />
-        <StatCard label="Scheduled" value="—" tone="warning" />
-        <StatCard label="CTR (7d)" value="—" tone="premium" />
-      </div>
-
-      <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="glass overflow-hidden rounded-2xl">
-            <div className="relative h-44 bg-gradient-to-br from-primary/40 via-surface to-accent/30">
-              <div className="absolute inset-0 [background-image:radial-gradient(circle_at_30%_50%,white,transparent_60%)] opacity-10" />
-              <button className="absolute left-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-md bg-background/40 backdrop-blur">
-                <GripVertical className="h-4 w-4 text-muted-foreground" />
-              </button>
-              <div className="absolute right-3 top-3 flex items-center gap-1">
-                <span className="rounded bg-background/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-success backdrop-blur">Live</span>
-                <span className="rounded bg-background/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent backdrop-blur">Slot {i + 1}</span>
-              </div>
-              <div className="absolute inset-x-4 bottom-4">
-                <div className="text-lg font-bold">Marketplace Control Center</div>
-                <div className="text-xs text-muted-foreground">CTA: Open Manager</div>
-              </div>
-            </div>
-              <div className="flex items-center justify-between border-t border-border p-3">
-              <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> Always</span>
-                <span className="inline-flex items-center gap-1"><Globe2 className="h-3.5 w-3.5" /> Global</span>
-                <span className="inline-flex items-center gap-1"><Smartphone className="h-3.5 w-3.5" /> All</span>
-              </div>
-              <RowActions ids={["view","edit","duplicate","publish","archive","delete"]} />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ---------- CATEGORY MANAGER ----------
 const CATS = [

@@ -24,7 +24,7 @@ export function MarketplaceManagerModule() {
   const navigate = (id: SectionId) => setSection(id);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="mm-theme min-h-screen bg-background text-foreground">
       <MarketplaceTopBar active={section} onChange={setSection} />
       <main>
         <SectionBoundary sectionKey={section}>

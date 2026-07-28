@@ -22,7 +22,6 @@ import softwareValaLogo from "@/assets/software-vala-logo.jpg";
 import HeroCarousel from "@/components/marketplace/HeroCarousel";
 import FestiveBanner from "@/components/marketplace/FestiveBanner";
 import CategorySlider from "@/components/marketplace/CategorySlider";
-import RefHeroBanner from "@/components/marketplace/RefHeroBanner";
 import {
   IndustryGrid, AIZone, SuccessStories, AwardsRow, LiveActivity,
   ValaTV, Academy as ValaAcademy, PartnerEcosystem, FaqSection, EnterpriseCTA,

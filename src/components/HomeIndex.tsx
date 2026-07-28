@@ -3336,52 +3336,12 @@ const allDemos: Demo[] = [
     price: "\u20b969,999",
     discountPrice: "\u20b941,999"
   }
+,
+  ...extraDemos,
 ];
 
-// Master Categories for filtering (20 Categories)
-const masterCategories = [
-  "All",
-  "Education",
-  "Retail & POS",
-  "Healthcare",
-  "Logistics",
-  "Real Estate",
-  "Finance",
-  "Accounting",
-  "Sales & CRM",
-  "Marketing",
-  "HR & Payroll",
-  "ERP",
-  "Inventory",
-  "E-commerce",
-  "Hospitality",
-  "Telecom",
-  "Support",
-  "Legal",
-  "Government",
-  "Security",
-  "Cyber Security",
-  "Insurance",
-  "Telecom",
-  "Warehouse",
-  "Rental",
-  "Automobile",
-  "Religious",
-  "Public Utilities",
-  "Defense",
-  "Enterprise Admin",
-  "Veterinary",
-  "Food Manufacturing",
-  "Media & Design",
-  "Travel",
-  "Academy",
-  "Productivity",
-  "AI & Automation",
-  "Event",
-  "Construction",
-  "Agriculture",
-  "Manufacturing"
-];
+// Master Categories for filtering (55 rows — matches actual data values)
+const masterCategories = ["All", ...allMasterCategories55];
 
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -3486,7 +3446,7 @@ const Index = () => {
             transition={{ duration: 0.6 }}
           >
             <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 mb-4">
-              <Star className="h-3 w-3 mr-1" /> 40 Master Categories • 204 Software Solutions • 20 Live Demos
+              <Star className="h-3 w-3 mr-1" /> 55 Master Categories • {allDemos.length} Software Solutions • 20 Live Demos
             </Badge>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <div className="flex items-center gap-2 text-emerald-400">

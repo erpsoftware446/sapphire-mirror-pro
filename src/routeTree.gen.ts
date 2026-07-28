@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MarketplaceManagerRouteImport } from './routes/marketplace-manager'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 
 const MarketplaceManagerRoute = MarketplaceManagerRouteImport.update({
   id: '/marketplace-manager',
   path: '/marketplace-manager',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/marketplace-manager': typeof MarketplaceManagerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/marketplace-manager': typeof MarketplaceManagerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/marketplace-manager': typeof MarketplaceManagerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/marketplace-manager'
+  fullPaths: '/' | '/auth' | '/marketplace-manager'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/marketplace-manager'
-  id: '__root__' | '/' | '/marketplace-manager'
+  to: '/' | '/auth' | '/marketplace-manager'
+  id: '__root__' | '/' | '/auth' | '/marketplace-manager'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   MarketplaceManagerRoute: typeof MarketplaceManagerRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/marketplace-manager'
       fullPath: '/marketplace-manager'
       preLoaderRoute: typeof MarketplaceManagerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   MarketplaceManagerRoute: MarketplaceManagerRoute,
 }
 export const routeTree = rootRouteImport

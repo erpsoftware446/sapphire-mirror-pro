@@ -1,5 +1,4 @@
-import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState, useEffect, useCallback } from "react";
 import {
   Sparkles, GraduationCap, Stethoscope, Utensils, Hotel, Home, Car, Plane,
   CreditCard, Factory, Users, Truck, Building, Megaphone, Wallet, Briefcase,
@@ -31,96 +30,127 @@ const CATEGORIES = [
   { icon: Headphones, name: "Support", color: "from-teal-500 to-cyan-700", link: "/#Support" },
 ];
 
+// Duplicate the list so the auto-scroll can loop seamlessly.
+const LOOP = [...CATEGORIES, ...CATEGORIES];
+
 const CategorySlider = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const pausedRef = useRef(false);
+  const draggingRef = useRef(false);
+  const dragStart = useRef({ x: 0, scrollLeft: 0, moved: false });
 
-  const checkScroll = () => {
+  const checkScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 5);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
-  };
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.addEventListener("scroll", checkScroll);
-    checkScroll();
-    return () => el.removeEventListener("scroll", checkScroll);
   }, []);
 
+  // Silky smooth auto-scroll using rAF (sub-pixel movement, no jitter).
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    let dir = 1;
-    const timer = setInterval(() => {
-      if (isDragging || paused) return;
-      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 5) dir = -1;
-      if (el.scrollLeft <= 5) dir = 1;
-      el.scrollBy({ left: dir * 1, behavior: "auto" });
-    }, 25);
-    return () => clearInterval(timer);
-  }, [isDragging, paused]);
+    let raf = 0;
+    let last = performance.now();
+    const SPEED = 30; // px per second — professional, calm pace
+    const halfWidth = () => el.scrollWidth / 2;
 
-  const scroll = (dir: number) => scrollRef.current?.scrollBy({ left: dir * 240, behavior: "smooth" });
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      if (!pausedRef.current && !draggingRef.current) {
+        el.scrollLeft += SPEED * dt;
+        // Seamless loop: when past the first copy, jump back by its width.
+        if (el.scrollLeft >= halfWidth()) {
+          el.scrollLeft -= halfWidth();
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    el.addEventListener("scroll", checkScroll, { passive: true });
+    checkScroll();
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener("scroll", checkScroll);
+    };
+  }, [checkScroll]);
+
+  const scrollBy = (dir: number) => {
+    scrollRef.current?.scrollBy({ left: dir * 280, behavior: "smooth" });
+  };
+
+  // Pointer drag (unified mouse + touch)
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    draggingRef.current = true;
+    dragStart.current = { x: e.clientX, scrollLeft: el.scrollLeft, moved: false };
+    el.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!draggingRef.current) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    const dx = e.clientX - dragStart.current.x;
+    if (Math.abs(dx) > 4) dragStart.current.moved = true;
+    el.scrollLeft = dragStart.current.scrollLeft - dx;
+  };
+  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    draggingRef.current = false;
+    scrollRef.current?.releasePointerCapture(e.pointerId);
+  };
 
   return (
     <section
       className="relative py-6 bg-gradient-to-b from-[#0a1628] via-[#0d1e36]/70 to-transparent"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
     >
-      <div className="max-w-7xl mx-auto px-4 relative" style={{ perspective: 1000 }}>
+      <div className="max-w-7xl mx-auto px-4 relative">
         {canScrollLeft && (
-          <button onClick={() => scroll(-1)} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all shadow-xl border border-white/20">
+          <button onClick={() => scrollBy(-1)} aria-label="Scroll left" className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors shadow-xl border border-white/20">
             <ChevronLeft className="w-5 h-5" />
           </button>
         )}
         {canScrollRight && (
-          <button onClick={() => scroll(1)} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all shadow-xl border border-white/20">
+          <button onClick={() => scrollBy(1)} aria-label="Scroll right" className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors shadow-xl border border-white/20">
             <ChevronRight className="w-5 h-5" />
           </button>
         )}
 
         <div
           ref={scrollRef}
-          onMouseDown={(e) => { setIsDragging(true); setStartX(e.pageX - (scrollRef.current?.offsetLeft || 0)); setScrollLeft(scrollRef.current?.scrollLeft || 0); }}
-          onMouseMove={(e) => { if (!isDragging) return; e.preventDefault(); const x = e.pageX - (scrollRef.current?.offsetLeft || 0); if (scrollRef.current) scrollRef.current.scrollLeft = scrollLeft - (x - startX) * 1.5; }}
-          onMouseUp={() => setIsDragging(false)}
-          className="flex gap-3 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing px-10 py-3"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+          className="flex gap-3 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing px-10 py-3 select-none"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+            overscrollBehaviorX: "contain",
+            scrollBehavior: "auto",
+          }}
         >
-          {CATEGORIES.map((cat, i) => {
+          {LOOP.map((cat, i) => {
             const Icon = cat.icon;
             return (
               <a
-                key={cat.name}
+                key={`${cat.name}-${i}`}
                 href={cat.link}
-                onClick={(e) => isDragging && e.preventDefault()}
-                className="flex-shrink-0"
-                style={{ transformStyle: "preserve-3d" }}
+                onClick={(e) => { if (dragStart.current.moved) e.preventDefault(); }}
+                draggable={false}
+                className={`group relative flex-shrink-0 flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-br ${cat.color} text-white text-sm font-bold whitespace-nowrap shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] border border-white/25 transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgba(0,0,0,0.6)]`}
               >
-                <motion.div
-                  initial={{ opacity: 0, y: 20, rotateX: -30 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ delay: i * 0.04, type: "spring", stiffness: 200 }}
-                  whileHover={{ scale: 1.08, y: -4, rotateX: 8, rotateY: -8 }}
-                  whileTap={{ scale: 0.96 }}
-                  className={`relative flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-br ${cat.color} text-white text-sm font-bold whitespace-nowrap shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_40px_-8px_rgba(0,0,0,0.6)] transition-shadow border border-white/25`}
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <span className="absolute inset-0 rounded-2xl bg-gradient-to-t from-transparent via-white/10 to-white/30 pointer-events-none" />
-                  <span className="relative flex items-center justify-center w-7 h-7 rounded-lg bg-white/25 backdrop-blur-sm shadow-inner border border-white/30">
-                    <Icon className="w-4 h-4 drop-shadow-lg" />
-                  </span>
-                  <span className="relative drop-shadow">{cat.name}</span>
-                </motion.div>
+                <span className="absolute inset-0 rounded-2xl bg-gradient-to-t from-transparent via-white/10 to-white/30 pointer-events-none" />
+                <span className="relative flex items-center justify-center w-7 h-7 rounded-lg bg-white/25 backdrop-blur-sm shadow-inner border border-white/30">
+                  <Icon className="w-4 h-4 drop-shadow-lg" />
+                </span>
+                <span className="relative drop-shadow">{cat.name}</span>
               </a>
             );
           })}

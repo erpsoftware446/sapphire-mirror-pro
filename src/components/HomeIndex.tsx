@@ -3412,6 +3412,17 @@ const Index = () => {
                   Login
                 </a>
               </Button>
+              {/* Marketplace Manager (single source of truth for this homepage) */}
+              <Button
+                asChild
+                size="sm"
+                className="bg-white/10 text-white border border-white/40 hover:bg-white/20 gap-1 text-xs backdrop-blur"
+              >
+                <a href="/marketplace-manager" title="Manage this homepage">
+                  <Settings className="h-3 w-3" />
+                  Marketplace Manager
+                </a>
+              </Button>
               {/* Temporary Boss Portal Access - Remove after 2-3 days */}
               <Button
                 asChild

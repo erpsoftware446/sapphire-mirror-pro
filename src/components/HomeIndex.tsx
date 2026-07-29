@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { 
-  Play, Heart, ShoppingCart, Filter, Search, Bell,
+  Play, Heart, ShoppingCart, Filter, Search, Bell, Settings,
   GraduationCap, Stethoscope, Utensils, Hotel, Home, Car, Plane,
   CreditCard, Factory, Users, Truck, Building, BookOpen, FlaskConical,
   Phone, Pill, Package, MapPin, Star, Award, CheckCircle, Wallet, Landmark,

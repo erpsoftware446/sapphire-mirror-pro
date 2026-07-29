@@ -367,6 +367,15 @@ export function MarketplaceTopBar({
           </div>
 
           {/* Notifications */}
+          <a
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            title="Open the public homepage in a new tab"
+            className="hidden items-center gap-1.5 rounded-full border border-border bg-white/[0.04] px-3 py-1.5 text-[11px] font-semibold text-muted-foreground transition-colors hover:bg-white/[0.08] hover:text-foreground md:inline-flex"
+          >
+            <Globe2 className="h-3.5 w-3.5" /> Preview Homepage
+          </a>
           <div data-menu-root className="relative">
             <button
               onClick={(e) => {

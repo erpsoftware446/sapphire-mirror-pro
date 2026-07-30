@@ -74,6 +74,45 @@ export type Database = {
         }
         Relationships: []
       }
+      site_notifications: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          is_published: boolean
+          kind: string
+          link_url: string | null
+          published_at: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          kind?: string
+          link_url?: string | null
+          published_at?: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          kind?: string
+          link_url?: string | null
+          published_at?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

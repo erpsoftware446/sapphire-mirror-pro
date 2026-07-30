@@ -22,6 +22,7 @@ import softwareValaLogo from "@/assets/software-vala-logo.jpg";
 import HeroCarousel from "@/components/marketplace/HeroCarousel";
 import FestiveBanner from "@/components/marketplace/FestiveBanner";
 import CategorySlider from "@/components/marketplace/CategorySlider";
+import { TopUtilityBar } from "@/components/marketplace/TopUtilityBar";
 import {
   IndustryGrid, AIZone, SuccessStories, AwardsRow, LiveActivity,
   ValaTV, Academy as ValaAcademy, PartnerEcosystem, FaqSection, EnterpriseCTA,
@@ -3378,61 +3379,33 @@ const Index = () => {
                 <p className="text-white/90 text-sm">- The Name of Trust</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 flex-wrap justify-center">
-              {/* Career Portal Buttons */}
-              <Button asChild size="sm" className="bg-violet-600 hover:bg-violet-700 text-white gap-1 text-xs">
-                <a href="/careers?type=developer">
-                  <Code2 className="h-3 w-3" />
-                  Join as Developer
-                </a>
-              </Button>
-              <Button asChild size="sm" className="bg-pink-600 hover:bg-pink-700 text-white gap-1 text-xs">
-                <a href="/careers?type=influencer">
-                  <Megaphone className="h-3 w-3" />
-                  Become Influencer
-                </a>
-              </Button>
-              <Button asChild size="sm" className="bg-cyan-600 hover:bg-cyan-700 text-white gap-1 text-xs">
-                <a href="/careers?type=job">
-                  <Briefcase className="h-3 w-3" />
-                  Apply for Job
-                </a>
-              </Button>
-              {/* Pricing Badge */}
-              <Badge className="bg-white text-green-600 font-bold text-sm px-3 py-1.5 animate-pulse">
-                💰 $249 Lifetime
-              </Badge>
-              <Badge className="bg-white/20 text-white border-0 text-xs px-3 py-1.5">
-                🎉 40% OFF
-              </Badge>
-              {/* Login Button - For regular users */}
-              <Button asChild className="bg-white text-orange-600 hover:bg-white/90 font-bold gap-2">
-                <a href="/auth">
-                  <Lock className="h-4 w-4" />
-                  Login
-                </a>
-              </Button>
-              {/* Marketplace Manager (single source of truth for this homepage) */}
-              <Button
-                asChild
-                size="sm"
-                className="bg-white/10 text-white border border-white/40 hover:bg-white/20 gap-1 text-xs backdrop-blur"
-              >
-                <a href="/marketplace-manager" title="Manage this homepage">
-                  <Settings className="h-3 w-3" />
-                  Marketplace Manager
-                </a>
-              </Button>
-              {/* Temporary Boss Portal Access - Remove after 2-3 days */}
-              <Button
-                asChild
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold gap-2 shadow-lg shadow-purple-500/30"
-              >
-                <a href="/boss/login">
-                  <Shield className="h-4 w-4" />
-                  Boss Portal
-                </a>
-              </Button>
+            <div className="flex flex-col items-center gap-2 md:items-end">
+              {/* Premium utility bar: Apply · Language · Currency · Clock · Weather · Calendar · Calculator · AI · Notifications · Login · Register */}
+              <TopUtilityBar />
+              <div className="flex items-center gap-2 flex-wrap justify-center">
+                <Badge className="bg-white text-green-600 font-bold text-xs px-3 py-1">💰 $249 Lifetime</Badge>
+                <Badge className="bg-white/20 text-white border-0 text-xs px-3 py-1">🎉 40% OFF</Badge>
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-white/10 text-white border border-white/40 hover:bg-white/20 gap-1 text-xs backdrop-blur"
+                >
+                  <a href="/marketplace-manager" title="Manage this homepage">
+                    <Settings className="h-3 w-3" />
+                    Marketplace Manager
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold gap-1 text-xs shadow-lg shadow-purple-500/30"
+                >
+                  <a href="/boss/login">
+                    <Shield className="h-3 w-3" />
+                    Boss Portal
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

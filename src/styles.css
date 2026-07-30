@@ -275,3 +275,69 @@
   &::-webkit-scrollbar-thumb:hover { background: oklch(0.80 0.105 82 / 0.65); }
 }
 
+
+/* ── Korean-style micro-animations for the storefront utility bar ── */
+@keyframes kr-stagger-in {
+  0%   { opacity: 0; transform: translateY(-8px) scale(0.94); filter: blur(3px); }
+  60%  { opacity: 1; transform: translateY(1px) scale(1.02); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes kr-item-in {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes kr-sheen {
+  0%   { transform: translateX(-140%) skewX(-18deg); }
+  100% { transform: translateX(240%) skewX(-18deg); }
+}
+@keyframes kr-ring {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-16deg); }
+  40% { transform: rotate(14deg); }
+  60% { transform: rotate(-9deg); }
+  80% { transform: rotate(5deg); }
+}
+@keyframes kr-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+
+.kr-stagger { animation: kr-stagger-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.kr-item { animation: kr-item-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.kr-btn { overflow: hidden; isolation: isolate; }
+.kr-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateX(-140%) skewX(-18deg);
+}
+.kr-btn:hover::after { animation: kr-sheen 0.75s cubic-bezier(0.22, 1, 0.36, 1); }
+.kr-btn:active { transform: scale(0.96); }
+
+.kr-dot {
+  width: 6px; height: 6px; border-radius: 999px;
+  background: #34d399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.18);
+  animation: kr-pulse-dot 1.6s ease-in-out infinite;
+}
+
+.kr-panel { animation: kr-stagger-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.kr-key {
+  border-radius: 0.6rem;
+  padding: 0.5rem 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.18s ease;
+}
+.kr-key:hover { background-color: rgba(255, 255, 255, 0.18); transform: translateY(-1px); }
+.kr-key:active { transform: scale(0.93); }
+
+@media (prefers-reduced-motion: reduce) {
+  .kr-stagger, .kr-item, .kr-panel, .kr-dot { animation: none !important; }
+  .kr-btn:hover::after { animation: none; }
+}

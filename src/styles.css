@@ -406,6 +406,10 @@
   background: linear-gradient(180deg, #ffd98a, #f0a53a);
   color: #2a1704;
 }
+.tb-pill.tb-cyan {
+  border-color: rgba(103, 232, 249, 0.55);
+  background: linear-gradient(180deg, #22d3ee, #2563eb);
+}
 .tb-pill.tb-violet {
   border-color: rgba(167, 139, 250, 0.6);
   background: linear-gradient(180deg, #8b5cf6, #4f46e5);

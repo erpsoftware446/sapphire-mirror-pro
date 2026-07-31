@@ -12,7 +12,7 @@ import {
   Clock, Calendar, Briefcase, UserCog, Fingerprint, ShoppingBag, Store, Globe,
   Headphones, MessageSquare, Scale, Shield, Lock, Server, Cpu, Database,
   Wifi, Camera, Key, AlertTriangle, HardDrive, Eye, Radio, PhoneCall,
-  Mic, MonitorPlay, FileCheck, Gavel, ScrollText, Vote, Building2, Lightbulb, Code2
+  Mic, MonitorPlay, FileCheck, Gavel, ScrollText, Vote, Building2, Lightbulb, Code2, Tag
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

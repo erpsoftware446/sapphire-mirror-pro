@@ -57,17 +57,8 @@ const HeroCarousel = () => {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative z-20 hidden md:flex border-b border-white/10 bg-black/40 backdrop-blur-md px-6 lg:px-10 py-2">
-        <div className="max-w-7xl mx-auto w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-[11px] text-white/80">
-          <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-emerald-300 drop-shadow" /> No Advance Payment</span>
-          <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-cyan-300 drop-shadow" /> 2-Hour Delivery</span>
-          <span className="flex items-center gap-1.5"><BadgeCheck className="h-3.5 w-3.5 text-amber-300 drop-shadow" /> No Hidden Charges</span>
-          <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5 text-rose-300 drop-shadow" /> Trademark Protected</span>
-          <span className="flex items-center gap-1.5"><Boxes className="h-3.5 w-3.5 text-violet-300 drop-shadow" /> 204+ Solutions</span>
-          <span className="flex items-center gap-1.5"><Zap className="h-3.5 w-3.5 text-fuchsia-300 drop-shadow" /> 20 Live Demos</span>
-          <span className="flex items-center gap-1.5"><Globe2 className="h-3.5 w-3.5 text-sky-300 drop-shadow" /> Global Support</span>
-        </div>
-      </div>
+
+
 
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div

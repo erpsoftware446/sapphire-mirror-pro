@@ -21,6 +21,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import softwareValaLogo from "@/assets/software-vala-logo.jpg";
 import HeroCarousel from "@/components/marketplace/HeroCarousel";
 import FestiveBanner from "@/components/marketplace/FestiveBanner";
+import FeatureStrip from "@/components/marketplace/FeatureStrip";
 import CategorySlider from "@/components/marketplace/CategorySlider";
 import { TopUtilityBar } from "@/components/marketplace/TopUtilityBar";
 import {
@@ -3409,6 +3410,8 @@ const Index = () => {
       <FestiveBanner />
 
       {/* Auto-sliding Hero Carousel (merged: featured products + catalog/lifetime/delivery/AI slides) */}
+      <FeatureStrip />
+
       <HeroCarousel />
 
       {/* Industry Grid */}

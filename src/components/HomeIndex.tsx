@@ -12,7 +12,7 @@ import {
   Clock, Calendar, Briefcase, UserCog, Fingerprint, ShoppingBag, Store, Globe,
   Headphones, MessageSquare, Scale, Shield, Lock, Server, Cpu, Database,
   Wifi, Camera, Key, AlertTriangle, HardDrive, Eye, Radio, PhoneCall,
-  Mic, MonitorPlay, FileCheck, Gavel, ScrollText, Vote, Building2, Lightbulb, Code2
+  Mic, MonitorPlay, FileCheck, Gavel, ScrollText, Vote, Building2, Lightbulb, Code2, Tag
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -3383,28 +3383,22 @@ const Index = () => {
               {/* Premium utility bar: Apply · Language · Currency · Clock · Weather · Calendar · Calculator · AI · Notifications · Login · Register */}
               <TopUtilityBar />
               <div className="flex items-center gap-2 flex-wrap justify-center">
-                <Badge className="bg-white text-green-600 font-bold text-xs px-3 py-1">💰 $249 Lifetime</Badge>
-                <Badge className="bg-white/20 text-white border-0 text-xs px-3 py-1">🎉 40% OFF</Badge>
-                <Button
-                  asChild
-                  size="sm"
-                  className="bg-white/10 text-white border border-white/40 hover:bg-white/20 gap-1 text-xs backdrop-blur"
-                >
-                  <a href="/marketplace-manager" title="Manage this homepage">
-                    <Settings className="h-3 w-3" />
-                    Marketplace Manager
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold gap-1 text-xs shadow-lg shadow-purple-500/30"
-                >
-                  <a href="/boss/login">
-                    <Shield className="h-3 w-3" />
-                    Boss Portal
-                  </a>
-                </Button>
+                <span className="tb-pill tb-gold">
+                  <Coins />
+                  $249 Lifetime Deal
+                </span>
+                <span className="tb-pill">
+                  <Tag />
+                  40% OFF
+                </span>
+                <a href="/marketplace-manager" title="Manage this homepage" className="tb-pill">
+                  <Settings />
+                  Marketplace Manager
+                </a>
+                <a href="/boss/login" className="tb-pill tb-violet">
+                  <Shield />
+                  Boss Portal
+                </a>
               </div>
             </div>
           </div>

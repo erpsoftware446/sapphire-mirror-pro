@@ -53,8 +53,7 @@ import {
 /* shared shell                                                        */
 /* ------------------------------------------------------------------ */
 
-const TRIGGER =
-  "kr-btn group relative inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-white/60 hover:bg-white/20";
+const TRIGGER = "kr-btn tb-pill group";
 
 const PANEL =
   "kr-panel w-[300px] rounded-2xl border border-white/10 bg-[#0b1a30]/95 p-0 text-white shadow-2xl backdrop-blur-xl";
@@ -947,13 +946,13 @@ export function TopUtilityBar() {
           {el}
         </div>
       ))}
-      <a href="/auth" className={`${TRIGGER} bg-white text-orange-600 hover:bg-white/90`}>
+      <a href="/auth" className={`${TRIGGER} tb-solid text-orange-600`}>
         <LogIn className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
         {t("Login")}
       </a>
       <a
         href="/auth?mode=signup"
-        className={`${TRIGGER} border-transparent bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500`}
+        className={`${TRIGGER} tb-cyan`}
       >
         <UserPlus className="h-3.5 w-3.5 transition-transform duration-300 group-hover:scale-110" />
         {t("Register")}

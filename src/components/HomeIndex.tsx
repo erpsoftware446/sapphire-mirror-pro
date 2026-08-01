@@ -29,6 +29,8 @@ import {
   ValaTV, Academy as ValaAcademy, PartnerEcosystem, FaqSection, EnterpriseCTA,
 } from "@/components/marketplace/RefSections";
 import { extraDemos, allMasterCategories55 } from "@/data/extraDemos";
+import { useQuery } from "@tanstack/react-query";
+import { homepageConfigQuery, sectionVisible } from "@/lib/marketplace-content/siteQueries";
 
 interface Demo {
   id: string;
@@ -3345,6 +3347,13 @@ const allDemos: Demo[] = [
 const masterCategories = ["All", ...allMasterCategories55];
 
 const Index = () => {
+  const { data: cfg } = useQuery(homepageConfigQuery());
+  const show = (key: string) => sectionVisible(cfg, key);
+  const brand = (cfg?.settings.brand ?? {}) as { name?: string; tagline?: string };
+  const badges = (cfg?.settings.header_badges ?? {}) as {
+    lifetime_deal?: string; discount?: string; show_manager_link?: boolean; show_boss_portal?: boolean;
+  };
+  const footerCfg = (cfg?.settings.footer ?? {}) as { copyright?: string; tagline?: string };
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -3376,30 +3385,38 @@ const Index = () => {
             <div className="flex items-center gap-4">
               <img src={softwareValaLogo} alt="Software Vala" className="h-14 w-14 rounded-full object-cover border-2 border-white shadow-lg" />
               <div>
-                <h1 className="text-white font-bold text-2xl">Software Vala</h1>
-                <p className="text-white/90 text-sm">- The Name of Trust</p>
+                <h1 className="text-white font-bold text-2xl">{brand.name ?? "Software Vala"}</h1>
+                <p className="text-white/90 text-sm">{brand.tagline ?? "- The Name of Trust"}</p>
               </div>
             </div>
             <div className="flex flex-col items-center gap-2 md:items-end">
               {/* Premium utility bar: Apply · Language · Currency · Clock · Weather · Calendar · Calculator · AI · Notifications · Login · Register */}
               <TopUtilityBar />
               <div className="flex items-center gap-2 flex-wrap justify-center">
-                <span className="tb-pill tb-gold">
-                  <Coins />
-                  $249 Lifetime Deal
-                </span>
-                <span className="tb-pill">
-                  <Tag />
-                  40% OFF
-                </span>
-                <a href="/marketplace-manager" title="Manage this homepage" className="tb-pill">
-                  <Settings />
-                  Marketplace Manager
-                </a>
-                <a href="/boss/login" className="tb-pill tb-violet">
-                  <Shield />
-                  Boss Portal
-                </a>
+                {badges.lifetime_deal !== "" && (
+                  <span className="tb-pill tb-gold">
+                    <Coins />
+                    {badges.lifetime_deal ?? "$249 Lifetime Deal"}
+                  </span>
+                )}
+                {badges.discount !== "" && (
+                  <span className="tb-pill">
+                    <Tag />
+                    {badges.discount ?? "40% OFF"}
+                  </span>
+                )}
+                {badges.show_manager_link !== false && (
+                  <a href="/marketplace-manager" title="Manage this homepage" className="tb-pill">
+                    <Settings />
+                    Marketplace Manager
+                  </a>
+                )}
+                {badges.show_boss_portal !== false && (
+                  <a href="/boss/login" className="tb-pill tb-violet">
+                    <Shield />
+                    Boss Portal
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -3407,19 +3424,19 @@ const Index = () => {
       </header>
 
       {/* Festive Banner */}
-      <FestiveBanner />
+      {show("announcement") && <FestiveBanner />}
 
       {/* Auto-sliding Hero Carousel (merged: featured products + catalog/lifetime/delivery/AI slides) */}
-      <FeatureStrip />
+      {show("feature_strip") && <FeatureStrip />}
 
-      <HeroCarousel />
+      {show("hero") && <HeroCarousel />}
 
       {/* Industry Grid */}
-      <div className="max-w-7xl mx-auto"><IndustryGrid /></div>
+      {show("industry_grid") && <div className="max-w-7xl mx-auto"><IndustryGrid /></div>}
 
 
       {/* Category Slider (auto-scroll) */}
-      <CategorySlider />
+      {show("category_slider") && <CategorySlider />}
 
       {/* Hero Section */}
       <section className="py-12 px-4 bg-gradient-to-b from-[#0d1e36] to-transparent">
@@ -3522,22 +3539,22 @@ const Index = () => {
 
       {/* Reference marketplace sections (added below product grid, keeping design intact) */}
       <div className="max-w-7xl mx-auto">
-        <AIZone />
-        <SuccessStories />
-        <AwardsRow />
-        <LiveActivity />
-        <ValaTV />
-        <ValaAcademy />
-        <PartnerEcosystem />
-        <FaqSection />
-        <EnterpriseCTA />
+        {show("ai_zone") && <AIZone />}
+        {show("success_stories") && <SuccessStories />}
+        {show("awards") && <AwardsRow />}
+        {show("live_activity") && <LiveActivity />}
+        {show("vala_tv") && <ValaTV />}
+        {show("academy") && <ValaAcademy />}
+        {show("partners") && <PartnerEcosystem />}
+        {show("faq") && <FaqSection />}
+        {show("enterprise_cta") && <EnterpriseCTA />}
       </div>
 
       {/* Footer */}
       <footer className="bg-[#0a1628] border-t border-cyan-500/20 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400">© 2024 Software Vala - The Name of Trust. All rights reserved.</p>
-          <p className="text-cyan-400 mt-2">55 Master Categories • {allDemos.length} Software Solutions • 20 Live Demos Ready</p>
+          <p className="text-gray-400">{footerCfg.copyright ?? "© 2024 Software Vala - The Name of Trust. All rights reserved."}</p>
+          <p className="text-cyan-400 mt-2">{footerCfg.tagline ?? `55 Master Categories • ${allDemos.length} Software Solutions • 20 Live Demos Ready`}</p>
         </div>
       </footer>
     </div>

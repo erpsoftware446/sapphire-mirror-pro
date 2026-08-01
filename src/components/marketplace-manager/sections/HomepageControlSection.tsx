@@ -66,7 +66,7 @@ function Gate({ children }: { children: React.ReactNode }) {
           <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-warning/15 text-warning"><ShieldAlert className="h-6 w-6" /></div>
           <h2 className="text-lg font-semibold">Admin access needed</h2>
           <p className="mt-1 text-sm text-muted-foreground">Your account is signed in but has no admin role yet.</p>
-          <button onClick={() => claim.mutate({} as never)} className="mt-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2 text-sm font-semibold text-white">
+          <button onClick={() => claim.mutate(undefined as never)} className="mt-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2 text-sm font-semibold text-white">
             {claim.isPending ? "Claiming…" : "Claim admin (first user only)"}
           </button>
         </Card>
@@ -88,11 +88,17 @@ function HomepageControlInner() {
   const cfg = cfgQ.data;
   const refresh = () => qc.invalidateQueries({ queryKey: ["homepage_config"] });
 
-  const saveAnn = useMutation({ mutationFn: useServerFn(upsertAnnouncement), onSuccess: () => { toast.success("Announcement saved — live on homepage"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
-  const delAnn = useMutation({ mutationFn: useServerFn(deleteAnnouncement), onSuccess: () => { toast.success("Announcement removed"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
-  const saveFeat = useMutation({ mutationFn: useServerFn(upsertFeatureItem), onSuccess: () => { toast.success("Feature strip updated"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
-  const delFeat = useMutation({ mutationFn: useServerFn(deleteFeatureItem), onSuccess: () => { toast.success("Item removed"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
-  const saveSetting = useMutation({ mutationFn: useServerFn(saveSiteSetting), onSuccess: () => { toast.success("Settings saved"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
+  const upsertAnnFn = useServerFn(upsertAnnouncement);
+  const delAnnFn = useServerFn(deleteAnnouncement);
+  const upsertFeatFn = useServerFn(upsertFeatureItem);
+  const delFeatFn = useServerFn(deleteFeatureItem);
+  const saveSettingFn = useServerFn(saveSiteSetting);
+
+  const saveAnn = useMutation({ mutationFn: (v: Omit<Announcement, "id"> & { id?: string }) => upsertAnnFn({ data: v }), onSuccess: () => { toast.success("Announcement saved — live on homepage"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
+  const delAnn = useMutation({ mutationFn: (id: string) => delAnnFn({ data: { id } }), onSuccess: () => { toast.success("Announcement removed"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
+  const saveFeat = useMutation({ mutationFn: (v: Omit<FeatureItem, "id"> & { id?: string }) => upsertFeatFn({ data: v }), onSuccess: () => { toast.success("Feature strip updated"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
+  const delFeat = useMutation({ mutationFn: (id: string) => delFeatFn({ data: { id } }), onSuccess: () => { toast.success("Item removed"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
+  const saveSetting = useMutation({ mutationFn: (v: { key: string; value: unknown }) => saveSettingFn({ data: v }), onSuccess: () => { toast.success("Settings saved"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
 
   const [brand, setBrand] = useState<{ name: string; tagline: string } | null>(null);
   const [footer, setFooter] = useState<{ copyright: string; tagline: string } | null>(null);
@@ -183,7 +189,7 @@ function HomepageControlInner() {
             <AnnouncementRow
               key={a.id} row={a}
               onSave={(v) => saveAnn.mutate(v)}
-              onDelete={() => delAnn.mutate({ id: a.id })}
+              onDelete={() => delAnn.mutate(a.id)}
             />
           ))}
           {anns.length === 0 && <div className="text-sm text-muted-foreground">No announcements — the banner is hidden.</div>}
@@ -203,7 +209,7 @@ function HomepageControlInner() {
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           {feats.map((it) => (
-            <FeatureRow key={it.id} row={it} onSave={(v) => saveFeat.mutate(v)} onDelete={() => delFeat.mutate({ id: it.id })} />
+            <FeatureRow key={it.id} row={it} onSave={(v) => saveFeat.mutate(v)} onDelete={() => delFeat.mutate(it.id)} />
           ))}
         </div>
       </Card>
@@ -277,8 +283,10 @@ function LayoutOrderInner() {
   const qc = useQueryClient();
   const cfgQ = useQuery(homepageConfigQuery());
   const refresh = () => qc.invalidateQueries({ queryKey: ["homepage_config"] });
-  const update = useMutation({ mutationFn: useServerFn(updateHomepageSection), onSuccess: () => { toast.success("Homepage updated"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
-  const reorder = useMutation({ mutationFn: useServerFn(reorderHomepageSections), onSuccess: () => { toast.success("Order saved"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
+  const updateFn = useServerFn(updateHomepageSection);
+  const reorderFn = useServerFn(reorderHomepageSections);
+  const update = useMutation({ mutationFn: (v: { id: string; visible?: boolean; label?: string }) => updateFn({ data: v }), onSuccess: () => { toast.success("Homepage updated"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
+  const reorder = useMutation({ mutationFn: (order: { id: string; position: number }[]) => reorderFn({ data: { order } }), onSuccess: () => { toast.success("Order saved"); refresh(); }, onError: (e: Error) => toast.error(e.message) });
 
   const sections: HomepageSection[] = cfgQ.data?.sections ?? [];
 
@@ -287,7 +295,7 @@ function LayoutOrderInner() {
     const j = idx + dir;
     if (j < 0 || j >= next.length) return;
     [next[idx], next[j]] = [next[j], next[idx]];
-    reorder.mutate({ order: next.map((s, i) => ({ id: s.id, position: i })) });
+    reorder.mutate(next.map((s, i) => ({ id: s.id, position: i })));
   };
 
   return (

@@ -488,7 +488,7 @@ export { DeploymentSection } from "./DeploymentSection";
 export { IntegritySection, MicroFeaturesSection } from "./IntegrityMicroSections";
 export { ToolkitSection } from "./ToolkitSection";
 export { TopBarManagerSection } from "./TopBarManagerSection";
-export { HomepageRowsSection } from "./HomepageRowsSection";
+export { HomepageControlSection as HomepageRowsSection, LayoutOrderSection } from "./HomepageControlSection";
 export { CardManagerSection } from "./CardManagerSection";
 export { DemoSection } from "./DemoSystemSection";
 export {
@@ -523,7 +523,6 @@ export {
   FiltersSection,
   UpcomingSection,
   NotificationsSection,
-  LayoutOrderSection,
 } from "./ExtraSections";
 
 // ---------- STICKY ----------

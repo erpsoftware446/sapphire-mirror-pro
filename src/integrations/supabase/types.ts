@@ -14,6 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          badge: string
+          created_at: string
+          ends_at: string | null
+          gradient: string
+          icon_name: string
+          id: string
+          position: number
+          starts_at: string | null
+          text: string
+          title: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          badge?: string
+          created_at?: string
+          ends_at?: string | null
+          gradient?: string
+          icon_name?: string
+          id?: string
+          position?: number
+          starts_at?: string | null
+          text?: string
+          title: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          badge?: string
+          created_at?: string
+          ends_at?: string | null
+          gradient?: string
+          icon_name?: string
+          id?: string
+          position?: number
+          starts_at?: string | null
+          text?: string
+          title?: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
+      feature_strip_items: {
+        Row: {
+          color_class: string
+          created_at: string
+          icon_name: string
+          id: string
+          label: string
+          position: number
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          color_class?: string
+          created_at?: string
+          icon_name?: string
+          id?: string
+          label: string
+          position?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          color_class?: string
+          created_at?: string
+          icon_name?: string
+          id?: string
+          label?: string
+          position?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       hero_slides: {
         Row: {
           accent: string
@@ -74,6 +152,36 @@ export type Database = {
         }
         Relationships: []
       }
+      homepage_sections: {
+        Row: {
+          created_at: string
+          id: string
+          label: string
+          position: number
+          section_key: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label: string
+          position?: number
+          section_key: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string
+          position?: number
+          section_key?: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       site_notifications: {
         Row: {
           body: string
@@ -110,6 +218,27 @@ export type Database = {
           sort_order?: number
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          created_at: string
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          created_at?: string
+          key: string
+          updated_at?: string
+          value?: Json
+        }
+        Update: {
+          created_at?: string
+          key?: string
+          updated_at?: string
+          value?: Json
         }
         Relationships: []
       }

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import HomeIndex from "@/components/HomeIndex";
 import { Toaster } from "sonner";
 import { heroPublicQuery } from "@/lib/marketplace-content/heroQueries";
+import { homepageConfigQuery } from "@/lib/marketplace-content/siteQueries";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,7 +13,12 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "20 master categories, 147 products, 20 live demos. Lifetime access." },
     ],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(heroPublicQuery()),
+  loader: async ({ context }) => {
+    await Promise.all([
+      context.queryClient.ensureQueryData(heroPublicQuery()),
+      context.queryClient.ensureQueryData(homepageConfigQuery()),
+    ]);
+  },
   component: Index,
 });
 

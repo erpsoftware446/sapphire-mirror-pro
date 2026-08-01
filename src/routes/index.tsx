@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import HomeIndex from "@/components/HomeIndex";
 import { Toaster } from "sonner";
 import { heroPublicQuery } from "@/lib/marketplace-content/heroQueries";
+import { homepageConfigQuery } from "@/lib/marketplace-content/siteQueries";
 
 export const Route = createFileRoute("/")({
   head: () => ({

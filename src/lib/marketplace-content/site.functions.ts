@@ -34,7 +34,8 @@ export type HomepageSection = {
   visible: boolean;
 };
 
-export type SiteSettings = Record<string, Record<string, unknown>>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type SiteSettings = Record<string, Record<string, any>>;
 
 export type HomepageConfig = {
   settings: SiteSettings;
@@ -74,7 +75,7 @@ export const getHomepageConfig = createServerFn({ method: "GET" }).handler(
 
     const settings: SiteSettings = {};
     for (const row of s.data ?? []) {
-      settings[row.key as string] = (row.value ?? {}) as Record<string, unknown>;
+      settings[row.key as string] = (row.value ?? {}) as Record<string, any>;
     }
     return {
       settings,

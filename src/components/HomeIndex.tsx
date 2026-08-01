@@ -3438,7 +3438,7 @@ const Index = () => {
       {/* Category Slider (auto-scroll) */}
       {show("category_slider") && <CategorySlider />}
 
-      {/* Hero Section */}
+{show("stats") && (<>      {/* Hero Section */}
       <section className="py-12 px-4 bg-gradient-to-b from-[#0d1e36] to-transparent">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
@@ -3465,7 +3465,7 @@ const Index = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section></>)}
 
 
 
@@ -3490,7 +3490,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Demo Cards Grid */}
+{show("catalog") && (<>      {/* Demo Cards Grid */}
       <section className="py-8 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Group by Master Category when "All" is selected */}
@@ -3535,7 +3535,7 @@ const Index = () => {
             </div>
           )}
         </div>
-      </section>
+      </section></>)}
 
       {/* Reference marketplace sections (added below product grid, keeping design intact) */}
       <div className="max-w-7xl mx-auto">
@@ -3551,12 +3551,12 @@ const Index = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#0a1628] border-t border-cyan-500/20 py-8 px-4">
+{show("footer") && (<>      <footer className="bg-[#0a1628] border-t border-cyan-500/20 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">{footerCfg.copyright ?? "© 2024 Software Vala - The Name of Trust. All rights reserved."}</p>
           <p className="text-cyan-400 mt-2">{footerCfg.tagline ?? `55 Master Categories • ${allDemos.length} Software Solutions • 20 Live Demos Ready`}</p>
         </div>
-      </footer>
+      </footer></>)}
     </div>
   );
 };

@@ -12,7 +12,12 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "20 master categories, 147 products, 20 live demos. Lifetime access." },
     ],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(heroPublicQuery()),
+  loader: async ({ context }) => {
+    await Promise.all([
+      context.queryClient.ensureQueryData(heroPublicQuery()),
+      context.queryClient.ensureQueryData(homepageConfigQuery()),
+    ]);
+  },
   component: Index,
 });
 

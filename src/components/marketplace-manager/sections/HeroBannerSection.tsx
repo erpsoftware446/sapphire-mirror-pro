@@ -28,6 +28,7 @@ function blankSlide(nextPos: number): Omit<HeroSlide, "id"> & { id?: string } {
     kicker: "NEW",
     title: "New Hero Slide",
     subtitle: "Describe this offer.",
+    highlight: "",
     cta_primary: "Explore",
     cta_secondary: "See Demos",
     cta_link: "/marketplace",
@@ -231,6 +232,7 @@ function EditorDialog({ slide, onClose, onSave, busy }: { slide: HeroSlide; onCl
             <Field label="Kicker"><input value={f.kicker} onChange={(e) => set("kicker", e.target.value)} className={inputCls} /></Field>
             <Field label="Title" full><input value={f.title} onChange={(e) => set("title", e.target.value)} className={inputCls} /></Field>
             <Field label="Subtitle" full><textarea value={f.subtitle} onChange={(e) => set("subtitle", e.target.value)} rows={2} className={inputCls} /></Field>
+            <Field label="Highlight" full><input value={f.highlight ?? ""} onChange={(e) => set("highlight", e.target.value)} className={inputCls} /></Field>
             <Field label="Primary CTA text"><input value={f.cta_primary} onChange={(e) => set("cta_primary", e.target.value)} className={inputCls} /></Field>
             <Field label="Secondary CTA text"><input value={f.cta_secondary} onChange={(e) => set("cta_secondary", e.target.value)} className={inputCls} /></Field>
             <Field label="CTA link" full><input value={f.cta_link} onChange={(e) => set("cta_link", e.target.value)} className={inputCls} /></Field>

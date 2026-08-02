@@ -10,6 +10,7 @@ export type HeroSlide = {
   kicker: string;
   title: string;
   subtitle: string;
+  highlight: string;
   cta_primary: string;
   cta_secondary: string;
   cta_link: string;
@@ -57,6 +58,7 @@ const upsertSchema = z.object({
   kicker: z.string().min(1),
   title: z.string().min(1),
   subtitle: z.string().min(1),
+  highlight: z.string().default(""),
   cta_primary: z.string().min(1),
   cta_secondary: z.string().min(1),
   cta_link: z.string().min(1),

@@ -12,15 +12,20 @@ import {
 import { heroAdminQuery } from "@/lib/marketplace-content/heroQueries";
 
 const GRADIENT_PRESETS = [
-  "from-cyan-500 via-blue-600 to-indigo-700",
-  "from-amber-500 via-orange-600 to-rose-600",
-  "from-emerald-500 via-teal-600 to-cyan-700",
-  "from-fuchsia-500 via-purple-600 to-indigo-700",
-  "from-rose-500 via-pink-600 to-fuchsia-700",
-  "from-slate-800 via-slate-900 to-black",
+  "from-sky-200 via-cyan-100 to-white",
+  "from-violet-200 via-purple-100 to-white",
+  "from-emerald-200 via-teal-100 to-white",
+  "from-rose-200 via-pink-100 to-white",
+  "from-orange-200 via-amber-100 to-white",
+  "from-lime-200 via-green-100 to-white",
+  "from-indigo-200 via-sky-100 to-white",
+  "from-yellow-200 via-amber-100 to-white",
+  "from-cyan-200 via-sky-100 to-white",
+  "from-blue-200 via-white to-amber-100",
 ];
 const ICON_CHOICES = ["Boxes","Crown","Rocket","Sparkles","ShieldCheck","Zap","Store","Users","Utensils","GraduationCap","Stethoscope","ShoppingCart","Globe2","Lock","BadgeCheck","Clock","Play"];
-const ACCENT_CHOICES = ["text-white","text-cyan-100","text-amber-200","text-emerald-200","text-fuchsia-200","text-rose-200","text-yellow-200"];
+const ACCENT_CHOICES = ["text-sky-600","text-violet-600","text-emerald-600","text-rose-600","text-orange-600","text-green-600","text-indigo-600","text-amber-600","text-cyan-600","text-blue-600"];
+
 
 function blankSlide(nextPos: number): Omit<HeroSlide, "id"> & { id?: string } {
   return {
@@ -28,6 +33,7 @@ function blankSlide(nextPos: number): Omit<HeroSlide, "id"> & { id?: string } {
     kicker: "NEW",
     title: "New Hero Slide",
     subtitle: "Describe this offer.",
+    highlight: "",
     cta_primary: "Explore",
     cta_secondary: "See Demos",
     cta_link: "/marketplace",
@@ -231,6 +237,7 @@ function EditorDialog({ slide, onClose, onSave, busy }: { slide: HeroSlide; onCl
             <Field label="Kicker"><input value={f.kicker} onChange={(e) => set("kicker", e.target.value)} className={inputCls} /></Field>
             <Field label="Title" full><input value={f.title} onChange={(e) => set("title", e.target.value)} className={inputCls} /></Field>
             <Field label="Subtitle" full><textarea value={f.subtitle} onChange={(e) => set("subtitle", e.target.value)} rows={2} className={inputCls} /></Field>
+            <Field label="Highlight" full><input value={f.highlight ?? ""} onChange={(e) => set("highlight", e.target.value)} className={inputCls} /></Field>
             <Field label="Primary CTA text"><input value={f.cta_primary} onChange={(e) => set("cta_primary", e.target.value)} className={inputCls} /></Field>
             <Field label="Secondary CTA text"><input value={f.cta_secondary} onChange={(e) => set("cta_secondary", e.target.value)} className={inputCls} /></Field>
             <Field label="CTA link" full><input value={f.cta_link} onChange={(e) => set("cta_link", e.target.value)} className={inputCls} /></Field>

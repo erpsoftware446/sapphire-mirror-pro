@@ -100,6 +100,7 @@ export type Database = {
           cta_primary: string
           cta_secondary: string
           gradient: string
+          highlight: string
           icon_name: string
           id: string
           kicker: string
@@ -119,6 +120,7 @@ export type Database = {
           cta_primary: string
           cta_secondary: string
           gradient: string
+          highlight?: string
           icon_name: string
           id?: string
           kicker: string
@@ -138,6 +140,7 @@ export type Database = {
           cta_primary?: string
           cta_secondary?: string
           gradient?: string
+          highlight?: string
           icon_name?: string
           id?: string
           kicker?: string

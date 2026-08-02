@@ -95,6 +95,7 @@ const HeroCarousel = () => {
       }}
       aria-roledescription="carousel"
     >
+      <div className="relative">
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={product.id}
@@ -267,6 +268,8 @@ const HeroCarousel = () => {
           animate={{ width: paused || reduce ? "0%" : "100%" }}
           transition={{ duration: paused || reduce ? 0 : 6.5, ease: "linear" }}
         />
+      </div>
+
       </div>
 
       {/* global brand strip */}

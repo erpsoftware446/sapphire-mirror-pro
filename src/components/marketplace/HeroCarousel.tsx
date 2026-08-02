@@ -122,7 +122,7 @@ const HeroCarousel = () => {
             />
           ))}
 
-          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+          <div className="relative z-10 max-w-7xl mx-auto px-14 sm:px-16 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
             {/* LEFT */}
             <div className="text-center lg:text-left">
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">

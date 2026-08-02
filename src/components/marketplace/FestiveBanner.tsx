@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import * as Icons from "lucide-react";
 import { X, PartyPopper, Tag } from "lucide-react";
 import { homepageConfigQuery } from "@/lib/marketplace-content/siteQueries";
@@ -16,7 +16,7 @@ function iconFor(name: string) {
  * Marketplace Manager (announcements table) — no hardcoded copy.
  */
 const FestiveBanner = () => {
-  const { data } = useQuery(homepageConfigQuery());
+  const { data } = useSuspenseQuery(homepageConfigQuery());
   const [dismissed, setDismissed] = useState(false);
   const [index, setIndex] = useState(0);
   const [now, setNow] = useState<number | null>(null);

@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import * as Icons from "lucide-react";
 import { ShieldCheck } from "lucide-react";
 import { homepageConfigQuery } from "@/lib/marketplace-content/siteQueries";
@@ -10,7 +10,7 @@ function iconFor(name: string) {
 
 /** Trust strip — items managed from the Marketplace Manager. */
 const FeatureStrip = () => {
-  const { data } = useQuery(homepageConfigQuery());
+  const { data } = useSuspenseQuery(homepageConfigQuery());
   const items = (data?.features ?? []).filter((f) => f.visible);
   if (items.length === 0) return null;
 

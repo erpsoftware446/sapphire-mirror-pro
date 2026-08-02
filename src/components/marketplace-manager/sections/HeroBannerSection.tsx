@@ -12,15 +12,20 @@ import {
 import { heroAdminQuery } from "@/lib/marketplace-content/heroQueries";
 
 const GRADIENT_PRESETS = [
-  "from-cyan-500 via-blue-600 to-indigo-700",
-  "from-amber-500 via-orange-600 to-rose-600",
-  "from-emerald-500 via-teal-600 to-cyan-700",
-  "from-fuchsia-500 via-purple-600 to-indigo-700",
-  "from-rose-500 via-pink-600 to-fuchsia-700",
-  "from-slate-800 via-slate-900 to-black",
+  "from-sky-200 via-cyan-100 to-white",
+  "from-violet-200 via-purple-100 to-white",
+  "from-emerald-200 via-teal-100 to-white",
+  "from-rose-200 via-pink-100 to-white",
+  "from-orange-200 via-amber-100 to-white",
+  "from-lime-200 via-green-100 to-white",
+  "from-indigo-200 via-sky-100 to-white",
+  "from-yellow-200 via-amber-100 to-white",
+  "from-cyan-200 via-sky-100 to-white",
+  "from-blue-200 via-white to-amber-100",
 ];
 const ICON_CHOICES = ["Boxes","Crown","Rocket","Sparkles","ShieldCheck","Zap","Store","Users","Utensils","GraduationCap","Stethoscope","ShoppingCart","Globe2","Lock","BadgeCheck","Clock","Play"];
-const ACCENT_CHOICES = ["text-white","text-cyan-100","text-amber-200","text-emerald-200","text-fuchsia-200","text-rose-200","text-yellow-200"];
+const ACCENT_CHOICES = ["text-sky-600","text-violet-600","text-emerald-600","text-rose-600","text-orange-600","text-green-600","text-indigo-600","text-amber-600","text-cyan-600","text-blue-600"];
+
 
 function blankSlide(nextPos: number): Omit<HeroSlide, "id"> & { id?: string } {
   return {

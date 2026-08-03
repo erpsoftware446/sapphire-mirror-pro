@@ -104,7 +104,7 @@ const HeroCarousel = () => {
           key={product.id}
           custom={direction}
           variants={variants}
-          initial="enter"
+          initial={mounted ? "enter" : false}
           animate="center"
           exit="exit"
           transition={{ duration: reduce ? 0.25 : 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -214,6 +214,17 @@ const HeroCarousel = () => {
                 transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
               >
                 <Icon className={`h-16 w-16 sm:h-20 sm:w-20 ${product.accent} drop-shadow-[0_10px_18px_rgba(15,23,42,0.25)]`} />
+              </motion.div>
+
+              {/* animated mascot */}
+              <motion.div
+                className="absolute -bottom-2 -right-1 z-10 grid h-16 w-16 sm:h-20 sm:w-20 place-items-center rounded-full bg-white/90 backdrop-blur-md border border-white shadow-[0_18px_40px_-18px_rgba(15,23,42,0.7)]"
+                animate={reduce ? undefined : { y: [0, -10, 0], rotate: [-6, 6, -6] }}
+                transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <span className="text-3xl sm:text-4xl select-none" role="img" aria-label="mascot">
+                  {product.mascot || "🚀"}
+                </span>
               </motion.div>
 
               {sats.map((S, i) => {

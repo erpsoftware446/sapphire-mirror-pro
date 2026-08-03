@@ -32,6 +32,7 @@ const SATELLITES: LucideIcon[][] = [
 const BRAND_STRIP = [
   { icon: Boxes, value: "12,000+", label: "Ready Software" },
   { icon: Layers, value: "80+", label: "Business Categories" },
+  { icon: Sparkles, value: "One Marketplace", label: "Endless Solutions" },
   { icon: Wallet, value: "$249", label: "Lifetime License" },
   { icon: Headphones, value: "24/7", label: "Technical Support" },
   { icon: Handshake, value: "Buy • Sell • Resell", label: "Franchise & Partner" },

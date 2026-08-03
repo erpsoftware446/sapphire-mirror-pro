@@ -3773,15 +3773,15 @@ const DemoCard = ({ demo, index, isFavorite, onToggleFavorite }: {
               transition={{ duration: 0.2 }}
             >
               <div className="text-center">
-                <p className="text-cyan-400 text-lg font-bold">{Math.floor(Math.random() * 50 + 50)}+</p>
-                <p className="text-gray-500 text-[10px]">Clients</p>
+                <p className="text-cyan-400 text-lg font-bold">Lifetime</p>
+                <p className="text-gray-500 text-[10px]">License</p>
               </div>
               <div className="text-center">
-                <p className="text-emerald-400 text-lg font-bold">4.{Math.floor(Math.random() * 3 + 7)}</p>
-                <p className="text-gray-500 text-[10px]">Rating</p>
+                <p className="text-emerald-400 text-lg font-bold">24/7</p>
+                <p className="text-gray-500 text-[10px]">Support</p>
               </div>
               <div className="text-center">
-                <p className="text-purple-400 text-lg font-bold">{Math.floor(Math.random() * 10 + 5)}h</p>
+                <p className="text-purple-400 text-lg font-bold">2h</p>
                 <p className="text-gray-500 text-[10px]">Delivery</p>
               </div>
             </motion.div>

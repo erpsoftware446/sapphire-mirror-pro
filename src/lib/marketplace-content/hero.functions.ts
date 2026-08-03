@@ -17,6 +17,7 @@ export type HeroSlide = {
   gradient: string;
   icon_name: string;
   accent: string;
+  mascot: string;
   position: number;
   visible: boolean;
   published_at: string | null;
@@ -65,6 +66,7 @@ const upsertSchema = z.object({
   gradient: z.string().min(1),
   icon_name: z.string().min(1),
   accent: z.string().min(1),
+  mascot: z.string().default("🚀"),
   position: z.number().int().nonnegative(),
   visible: z.boolean(),
   published_at: z.string().nullable().optional(),

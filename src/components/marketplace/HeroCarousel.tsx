@@ -32,6 +32,7 @@ const SATELLITES: LucideIcon[][] = [
 const BRAND_STRIP = [
   { icon: Boxes, value: "12,000+", label: "Ready Software" },
   { icon: Layers, value: "80+", label: "Business Categories" },
+  { icon: Sparkles, value: "One Marketplace", label: "Endless Solutions" },
   { icon: Wallet, value: "$249", label: "Lifetime License" },
   { icon: Headphones, value: "24/7", label: "Technical Support" },
   { icon: Handshake, value: "Buy • Sell • Resell", label: "Franchise & Partner" },
@@ -96,7 +97,7 @@ const HeroCarousel = () => {
       aria-roledescription="carousel"
     >
       <div className="relative">
-      <AnimatePresence mode="wait" custom={direction}>
+      <AnimatePresence mode="wait" custom={direction} initial={false}>
         <motion.div
           key={product.id}
           custom={direction}
@@ -136,6 +137,11 @@ const HeroCarousel = () => {
                   </span>
                 </span>
               </div>
+
+              <p className="mb-2 text-[10px] font-black tracking-[0.32em] uppercase text-slate-500">
+                Software Vala
+              </p>
+
 
               <motion.h2
                 initial={{ opacity: 0, y: 18 }}
@@ -274,7 +280,7 @@ const HeroCarousel = () => {
 
       {/* global brand strip */}
       <div className="relative z-10 border-y border-slate-900/10 bg-gradient-to-r from-white via-slate-50 to-white">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {BRAND_STRIP.map((b) => (
             <div key={b.label} className="flex items-center gap-3">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white border border-slate-900/10 shadow-[0_10px_24px_-16px_rgba(15,23,42,0.8)]">

@@ -12,19 +12,21 @@ import {
 import { heroAdminQuery } from "@/lib/marketplace-content/heroQueries";
 
 const GRADIENT_PRESETS = [
-  "from-sky-200 via-cyan-100 to-white",
-  "from-violet-200 via-purple-100 to-white",
-  "from-emerald-200 via-teal-100 to-white",
-  "from-rose-200 via-pink-100 to-white",
-  "from-orange-200 via-amber-100 to-white",
-  "from-lime-200 via-green-100 to-white",
-  "from-indigo-200 via-sky-100 to-white",
-  "from-yellow-200 via-amber-100 to-white",
-  "from-cyan-200 via-sky-100 to-white",
-  "from-blue-200 via-white to-amber-100",
+  "from-sky-400 via-cyan-300 to-blue-500",
+  "from-violet-400 via-fuchsia-300 to-purple-500",
+  "from-emerald-400 via-teal-300 to-green-500",
+  "from-rose-400 via-pink-300 to-red-400",
+  "from-orange-400 via-amber-300 to-yellow-400",
+  "from-lime-400 via-green-300 to-emerald-500",
+  "from-indigo-400 via-blue-300 to-sky-500",
+  "from-yellow-400 via-orange-300 to-amber-500",
+  "from-cyan-400 via-sky-300 to-indigo-400",
+  "from-blue-400 via-indigo-300 to-amber-300",
 ];
+const MASCOT_CHOICES = ["🚀","🧰","👑","🛡️","🤝","🕒","🌍","🧑‍💼","🎬","💎","⚡","🎯","🏆","🛒","🤖"];
 const ICON_CHOICES = ["Boxes","Crown","Rocket","Sparkles","ShieldCheck","Zap","Store","Users","Utensils","GraduationCap","Stethoscope","ShoppingCart","Globe2","Lock","BadgeCheck","Clock","Play"];
-const ACCENT_CHOICES = ["text-sky-600","text-violet-600","text-emerald-600","text-rose-600","text-orange-600","text-green-600","text-indigo-600","text-amber-600","text-cyan-600","text-blue-600"];
+const ACCENT_CHOICES = ["text-sky-700","text-violet-700","text-emerald-800","text-rose-700","text-orange-700","text-green-800","text-indigo-700","text-amber-800","text-cyan-800","text-blue-800"];
+
 
 
 function blankSlide(nextPos: number): Omit<HeroSlide, "id"> & { id?: string } {
@@ -39,7 +41,8 @@ function blankSlide(nextPos: number): Omit<HeroSlide, "id"> & { id?: string } {
     cta_link: "/marketplace",
     gradient: GRADIENT_PRESETS[0],
     icon_name: "Boxes",
-    accent: "text-white",
+    accent: "text-sky-700",
+    mascot: "🚀",
     position: nextPos,
     visible: true,
     published_at: null,

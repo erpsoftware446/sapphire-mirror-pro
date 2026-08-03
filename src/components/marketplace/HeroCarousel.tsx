@@ -138,6 +138,11 @@ const HeroCarousel = () => {
                 </span>
               </div>
 
+              <p className="mb-2 text-[10px] font-black tracking-[0.32em] uppercase text-slate-500">
+                Software Vala
+              </p>
+
+
               <motion.h2
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}

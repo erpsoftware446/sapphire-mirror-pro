@@ -41,6 +41,8 @@ const BRAND_STRIP = [
 const HeroCarousel = () => {
   const { data: slides } = useSuspenseQuery(heroPublicQuery());
   const reduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
   const [paused, setPaused] = useState(false);
@@ -108,17 +110,18 @@ const HeroCarousel = () => {
           transition={{ duration: reduce ? 0.25 : 0.6, ease: [0.22, 1, 0.36, 1] }}
           className={`relative w-full bg-gradient-to-br ${product.gradient} py-12 sm:py-16 lg:py-20`}
         >
-          {/* light premium surface */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.95),transparent_55%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_80%,rgba(255,255,255,0.7),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.05)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_78%)]" />
+          {/* rich colour depth — never plain */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.55),transparent_52%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_78%,rgba(255,255,255,0.35),transparent_58%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(15,23,42,0.18),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.07)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_78%)]" />
 
-          {!reduce && [...Array(5)].map((_, i) => (
+          {mounted && !reduce && [...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute rounded-full bg-white/70 blur-3xl"
+              className="absolute rounded-full bg-white/55 blur-3xl"
               style={{ width: 120 + i * 46, height: 120 + i * 46, left: `${6 + i * 18}%`, top: `${10 + (i % 3) * 26}%` }}
-              animate={{ y: [0, -18, 0], opacity: [0.35, 0.7, 0.35] }}
+              animate={{ y: [0, -18, 0], opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 6 + i, repeat: Infinity, delay: i * 0.5 }}
             />
           ))}

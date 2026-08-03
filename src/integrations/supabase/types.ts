@@ -104,6 +104,7 @@ export type Database = {
           icon_name: string
           id: string
           kicker: string
+          mascot: string
           position: number
           published_at: string | null
           slug: string
@@ -124,6 +125,7 @@ export type Database = {
           icon_name: string
           id?: string
           kicker: string
+          mascot?: string
           position?: number
           published_at?: string | null
           slug: string
@@ -144,6 +146,7 @@ export type Database = {
           icon_name?: string
           id?: string
           kicker?: string
+          mascot?: string
           position?: number
           published_at?: string | null
           slug?: string

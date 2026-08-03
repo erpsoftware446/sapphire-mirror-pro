@@ -254,6 +254,11 @@ function EditorDialog({ slide, onClose, onSave, busy }: { slide: HeroSlide; onCl
                 {ICON_CHOICES.map((i) => <option key={i}>{i}</option>)}
               </select>
             </Field>
+            <Field label="Mascot emoji">
+              <select value={f.mascot ?? "🚀"} onChange={(e) => set("mascot", e.target.value)} className={inputCls}>
+                {MASCOT_CHOICES.map((m) => <option key={m}>{m}</option>)}
+              </select>
+            </Field>
             <Field label="Accent color">
               <select value={f.accent} onChange={(e) => set("accent", e.target.value)} className={inputCls}>
                 {ACCENT_CHOICES.map((i) => <option key={i}>{i}</option>)}

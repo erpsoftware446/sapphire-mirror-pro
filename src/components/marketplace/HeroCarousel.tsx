@@ -246,7 +246,7 @@ const HeroCarousel = () => {
                 );
               })}
 
-              {!reduce && [...Array(6)].map((_, i) => (
+              {mounted && !reduce && [...Array(6)].map((_, i) => (
                 <motion.span
                   key={`sp-${i}`}
                   className="absolute h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_10px_3px_rgba(255,255,255,0.9)]"

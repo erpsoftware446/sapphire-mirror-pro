@@ -183,7 +183,7 @@ const HeroCarousel = () => {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 <a
-                  href="/demos"
+                  href={/partner/i.test(product.cta_secondary) ? "/partnerships" : "/demos"}
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-white/85 backdrop-blur-md text-slate-800 font-semibold text-sm sm:text-base border border-white hover:bg-white transition-all shadow-[0_14px_34px_-20px_rgba(15,23,42,0.7)]"
                 >
                   {product.cta_secondary}
